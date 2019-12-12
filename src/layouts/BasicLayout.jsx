@@ -42,7 +42,7 @@ const defaultFooterDom = (
       {
         key: 'github',
         title: <Icon type="github" />,
-        href: 'https://github.com/paul-yangmy/paul',
+        href: 'https://github.com/paul-yangmy/antd_table',
         blankTarget: true,
       },
     ]}
