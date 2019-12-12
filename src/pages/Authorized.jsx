@@ -3,6 +3,7 @@ import Redirect from 'umi/redirect';
 import { connect } from 'dva';
 import pathToRegexp from 'path-to-regexp';
 import Authorized from '@/utils/Authorized';
+import { stringify } from 'querystring';
 
 const getRouteAuthority = (path, routeData) => {
   let authorities;
@@ -37,11 +38,15 @@ const AuthComponent = ({
 }) => {
   const { currentUser } = user;
   const { routes = [] } = route;
-  const isLogin = currentUser && currentUser.name;
+  const timeInterval = currentUser.logdate - localStorage.getItem('logInDate') <= 1000000;//1000s
+  const isLogin = currentUser && currentUser.userid && timeInterval;
+  const queryString = stringify({
+    redirect: window.location.href,
+  });
   return (
     <Authorized
       authority={getRouteAuthority(location.pathname, routes) || ''}
-      noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to="/user/login" />}
+      noMatch={isLogin ? <Redirect to="/exception/403" /> : <Redirect to={`/user/login?${queryString}`} />}
     >
       {children}
     </Authorized>

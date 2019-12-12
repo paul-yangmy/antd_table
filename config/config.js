@@ -119,6 +119,16 @@ export default {
               authority: ['admin', 'user'],
               routes: [
                 {
+                  path: '/',
+                  redirect: '/instance',
+                },
+                {
+                  path: '/instance',
+                  name: 'instance',
+                  icon: 'smile',
+                  component: './instance',
+                },
+                {
                   path: '/dashboard',
                   name: 'dashboard',
                   icon: 'dashboard',

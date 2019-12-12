@@ -11,7 +11,8 @@ import { Icon, Result, Button } from 'antd';
 import { formatMessage } from 'umi-plugin-react/locale';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
+//import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
+import { getAuthorityFromRouter } from '@/utils/utils';
 import logo from '../assets/logo.svg';
 const noMatch = (
   <Result
@@ -37,12 +38,24 @@ const menuDataRender = menuList =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="Paul_yangmy"
+    copyright="2019 蚂蚁金服体验技术部出品"
     links={[
+      {
+        key: 'Ant Design Pro',
+        title: 'Ant Design Pro',
+        href: 'https://pro.ant.design',
+        blankTarget: true,
+      },
       {
         key: 'github',
         title: <Icon type="github" />,
-        href: 'https://github.com/paul-yangmy/antd_table',
+        href: 'C:UsersymyumOneDrive学年设计配送icon.ico',
+        blankTarget: true,
+      },
+      {
+        key: 'Ant Design',
+        title: 'Ant Design',
+        href: 'https://ant.design',
         blankTarget: true,
       },
     ]}
@@ -50,27 +63,29 @@ const defaultFooterDom = (
 );
 
 const footerRender = () => {
-  if (!isAntDesignPro()) {
-    return defaultFooterDom;
-  } // return (
-  //   <>
-  //     {defaultFooterDom}
-  //     <div
-  //       style={{
-  //         padding: '0px 24px 24px',
-  //         textAlign: 'center',
-  //       }}
-  //     >
-  //       {/* <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
-  //         <img
-  //           src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
-  //           width="82px"
-  //           alt="netlify logo"
-  //         />
-  //       </a> */}
-  //     </div>
-  //   </>
-  // );
+  // if (!isAntDesignPro()) {
+  //   return defaultFooterDom;
+  // }
+
+  return (
+    <>
+      {defaultFooterDom}
+      <div
+        style={{
+          padding: '0px 24px 24px',
+          textAlign: 'center',
+        }}
+      >
+        <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
+          <img
+            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+            width="82px"
+            alt="netlify logo"
+          />
+        </a>
+      </div>
+    </>
+  );
 };
 
 const BasicLayout = props => {
@@ -85,14 +100,36 @@ const BasicLayout = props => {
   /**
    * constructor
    */
-
+  // console.log(props)
+  // const tasParams = {
+  //   ...this.props.routerData[location.pathname],
+  //   keys: location.pathname,
+  //   location,
+  //   dispatch: this.props.dispatch,
+  //   match,
+  // }
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
-    }
+
+    dispatch({
+      type: 'user/fetchCurrent',
+    });
   }, []);
+  /*
+  //每次render(包括第一次render和之后的每次update)之后需要做一些事情
+  useEffect(()=>{
+  part A
+  return part B;
+  });  //Part A是写在componentDidMount和componentDidUpdate的代码，part B是写在componentWillUnMount的代码
+  //只执行一次
+  useEffect(()=>{
+  part A
+  return part B;
+  }, []);//只在componentDidMount和componentWillUnMount时执行代码
+  //第二个参数[]表示useEffect里面的part A和part B不依赖任何props, state, 因此不需要再次render
+  //part A, part B里涉及到的props和state始终是初始值，不会被更新。
+  //如果第二个参数传[ list ]，表示useEffect会在list发生改变时执行。也就是在componentDidMount，componentDidUpdate( 检测到list更新之后)和componentWillUnMount时执行。
+  */
+
   /**
    * init variables
    */
@@ -142,8 +179,8 @@ const BasicLayout = props => {
           return first ? (
             <Link to={paths.join('/')}>{route.breadcrumbName}</Link>
           ) : (
-            <span>{route.breadcrumbName}</span>
-          );
+              <span>{route.breadcrumbName}</span>
+            );
         }}
         footerRender={footerRender}
         menuDataRender={menuDataRender}
