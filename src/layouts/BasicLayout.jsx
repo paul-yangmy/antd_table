@@ -72,7 +72,7 @@ const footerRender = () => {
   //       </a> */}
   //     </div>
   //   </>
-  );
+  // );
 };
 
 const BasicLayout = props => {
