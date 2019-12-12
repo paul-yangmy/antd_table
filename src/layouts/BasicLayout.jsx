@@ -37,24 +37,12 @@ const menuDataRender = menuList =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright="2019 蚂蚁金服体验技术部出品"
+    copyright="Paul_yangmy"
     links={[
-      {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
-        blankTarget: true,
-      },
       {
         key: 'github',
         title: <Icon type="github" />,
-        href: 'https://github.com/ant-design/ant-design-pro',
-        blankTarget: true,
-      },
-      {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        href: 'https://github.com/paul-yangmy/paul',
         blankTarget: true,
       },
     ]}
@@ -66,24 +54,24 @@ const footerRender = () => {
     return defaultFooterDom;
   }
 
-  return (
-    <>
-      {defaultFooterDom}
-      <div
-        style={{
-          padding: '0px 24px 24px',
-          textAlign: 'center',
-        }}
-      >
-        <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
-          <img
-            src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
-            width="82px"
-            alt="netlify logo"
-          />
-        </a>
-      </div>
-    </>
+  // return (
+  //   <>
+  //     {defaultFooterDom}
+  //     <div
+  //       style={{
+  //         padding: '0px 24px 24px',
+  //         textAlign: 'center',
+  //       }}
+  //     >
+  //       {/* <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
+  //         <img
+  //           src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"
+  //           width="82px"
+  //           alt="netlify logo"
+  //         />
+  //       </a> */}
+  //     </div>
+  //   </>
   );
 };
 

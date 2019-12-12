@@ -1,3 +1,4 @@
+
 import { Table, Input, Button, Popconfirm, Form } from 'antd';
 
 const EditableContext = React.createContext();
@@ -64,19 +65,19 @@ class EditableCell2 extends React.Component {
 
     render() {
         const {
-            editable2,
-            dataIndex2,
-            title2,
-            record2,
-            index2,
-            handleSave2,
+            editable,
+            dataIndex,
+            title,
+            record,
+            index,
+            handleSave,
             children,
             ...restProps
         } = this.props;
         return (
             <td {...restProps}>
-                {editable2 ? (
-                    <EditableContext.Consumer>{this.renderCell2}</EditableContext.Consumer>
+                {editable ? (
+                    <EditableContext.Consumer>{this.renderCell}</EditableContext.Consumer>
                 ) : (
                         children
                     )}
@@ -169,9 +170,10 @@ class EditableTable extends React.Component {
         const components = {
             body: {
                 row: EditableFormRow,
-                cell: EditableCell2,
+                cell2: EditableCell2,
             },
         };
+        console.log(components)
         const columns = this.columns.map(col => {
             if (!col.editable) {
                 return col;
@@ -179,11 +181,11 @@ class EditableTable extends React.Component {
             return {
                 ...col,
                 onCell: record => ({
-                    record2,
-                    editable2: col.editable2,
-                    dataIndex2: col.dataIndex2,
-                    title2: col.title2,
-                    handleSave2: this.handleSave2,
+                    record,
+                    editable: col.editable,
+                    dataIndex: col.dataIndex,
+                    title: col.title,
+                    handleSave: this.handleSave,
                 }),
             };
         });
@@ -194,7 +196,8 @@ class EditableTable extends React.Component {
         </Button>
                 <Table
                     components={components}
-                    rowClassName={() => 'editable-row'}
+                    // rowClassName={() => 'editable-row'}
+                    // rowClassName="editable-row"
                     bordered
                     dataSource={dataSource}
                     columns={columns}

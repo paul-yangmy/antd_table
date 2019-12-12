@@ -386,6 +386,7 @@ class EditableTable extends React.Component {
   };
   handleAdd = () => {
     const { count, instance } = this.state;
+    console.log(count)
     const newData = {
       name: 'string (e.g.: skySpark1)',
       area: 'string (e.g.: 亦庄总部生产区)',
@@ -396,7 +397,7 @@ class EditableTable extends React.Component {
       memoryUsed: 'int'
     };
     this.setState({
-      dataSource: [...instance, newData],
+      instance: [...instance, newData],
       count: count + 1,
     });
   };
@@ -415,8 +416,8 @@ class EditableTable extends React.Component {
       body: {
         cell: EditableCell,
         row: DragableBodyRow,
-        row: EditableFormRow,
-        cell: EditableCell2,
+        row2: EditableFormRow,
+        cell2: EditableCell2,
       },
     };
 
@@ -437,6 +438,7 @@ class EditableTable extends React.Component {
 
     return (
       <PageHeaderWrapper>
+        <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>添加</Button>
         <Card>
           <EditableContext.Provider value={this.props.form}>
             <DndProvider backend={HTML5Backend}>
