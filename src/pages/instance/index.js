@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  connect
-} from 'dva';
+import { connect } from 'dva';
 import { Table, Card, Divider, Input, InputNumber, Button, Popconfirm, Form } from 'antd';
-import {
-  PageHeaderWrapper
-} from '@ant-design/pro-layout';
+import { PageHeaderWrapper } from '@ant-design/pro-layout';
 import { DndProvider, DragSource, DropTarget } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
@@ -14,7 +10,6 @@ import update from 'immutability-helper';
 let dragingIndex = -1;
 
 class BodyRow extends React.Component {
-
   render() {
     // console.log(this.props);
     const { isOver, connectDragSource, connectDropTarget, moveRow, ...restProps } = this.props;
@@ -112,8 +107,8 @@ class EditableCell extends React.Component {
             })(this.getInput())}
           </Form.Item>
         ) : (
-            children
-          )}
+          children
+        )}
       </td>
     );
   };
@@ -172,14 +167,14 @@ class EditableCell2 extends React.Component {
         })(<Input ref={node => (this.input = node)} onPressEnter={this.save} onBlur={this.save} />)}
       </Form.Item>
     ) : (
-        <div
-          className="editable-cell-value-wrap"
-          style={{ paddingRight: 24 }}
-          onClick={this.toggleEdit}
-        >
-          {children}
-        </div>
-      );
+      <div
+        className="editable-cell-value-wrap"
+        style={{ paddingRight: 24 }}
+        onClick={this.toggleEdit}
+      >
+        {children}
+      </div>
+    );
   };
 
   render() {
@@ -198,8 +193,8 @@ class EditableCell2 extends React.Component {
         {editable ? (
           <EditableContext.Consumer>{this.renderCell}</EditableContext.Consumer>
         ) : (
-            children
-          )}
+          children
+        )}
       </td>
     );
   }
@@ -212,17 +207,21 @@ class EditableCell2 extends React.Component {
 class EditableTable extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { instance: [], editingKey: '' ,count:0 };
+    this.state = { instance: [], editingKey: '', count: 0 };
     this.columns = [
       {
         title: '实例名',
         dataIndex: 'name',
         key: 'name',
         editable: true,
-        render: text => <a href="https://baidu.com" target="_blank" >
-          {//浏览器总在一个新打开、未命名的窗口中载入目标文档。
-            text
-          } </a>,
+        render: text => (
+          <a href="https://baidu.com" target="_blank">
+            {
+              //浏览器总在一个新打开、未命名的窗口中载入目标文档。
+              text
+            }{' '}
+          </a>
+        ),
       },
       {
         title: '区域',
@@ -260,7 +259,7 @@ class EditableTable extends React.Component {
         dataIndex: 'memoryUsed',
         key: 'memoryUsed',
         editable: true,
-        render: text => (`${text}M`),
+        render: text => `${text}M`,
       },
       {
         title: '操作',
@@ -276,12 +275,8 @@ class EditableTable extends React.Component {
               </Popconfirm>
               <Divider type="vertical" />
               <EditableContext.Consumer>
-                {
-                form => (
-                  <a
-                    onClick={() => this.save(form, record.name)}
-                    style={{ marginRight: 8 }}
-                  >
+                {form => (
+                  <a onClick={() => this.save(form, record.name)} style={{ marginRight: 8 }}>
                     保存
                   </a>
                 )}
@@ -292,17 +287,20 @@ class EditableTable extends React.Component {
               </Popconfirm>
             </span>
           ) : (
-              <div>
-                <Popconfirm title="确定要删除吗？" onConfirm={() => this.handleDelete(record)}>
-                  {/* {console.log(record)} */}
-                  <a> 删除</a>
-                </Popconfirm>
-                <Divider type="vertical" />
-                <a disabled={editingKey !== ''/*是否禁用点击属性*/} onClick={() => this.edit(record.name)}>
-                  编辑
-                </a>
-              </div>
-            );
+            <div>
+              <Popconfirm title="确定要删除吗？" onConfirm={() => this.handleDelete(record)}>
+                {/* {console.log(record)} */}
+                <a> 删除</a>
+              </Popconfirm>
+              <Divider type="vertical" />
+              <a
+                disabled={editingKey !== '' /*是否禁用点击属性*/}
+                onClick={() => this.edit(record.name)}
+              >
+                编辑
+              </a>
+            </div>
+          );
         },
       },
     ];
@@ -312,7 +310,7 @@ class EditableTable extends React.Component {
     const { dispatch } = this.props;
     dispatch({
       type: 'instance/query',
-      callback: (inst,count) => this.setState({ instance: inst ,count:inst.length}),
+      callback: (inst, count) => this.setState({ instance: inst, count: inst.length }),
     });
   }
   // setState(updater, callback)这个方法是用来告诉react组件数据有更新，有可能需要重新渲染。
@@ -350,13 +348,13 @@ class EditableTable extends React.Component {
   }
 
   edit(key) {
-    console.log(key)
+    console.log(key);
     this.setState({ editingKey: key });
   }
-  handleDelete = (data) => {
-    console.log(this.state)
+  handleDelete = data => {
+    console.log(this.state);
     const { instance } = this.state;
-    const newInstance = [...instance]
+    const newInstance = [...instance];
     // console.log(instance)
     // console.log(instance.length)
     for (var i = 0; i < instance.length; i++) {
@@ -369,7 +367,7 @@ class EditableTable extends React.Component {
     // instance.splice(index,1)
     // console.log(instance)
     // this.setState(instance)
-    this.setState({ instance: newInstance })
+    this.setState({ instance: newInstance });
   };
 
   moveRow = (dragIndex, hoverIndex) => {
@@ -379,14 +377,17 @@ class EditableTable extends React.Component {
     this.setState(
       update(this.state, {
         instance: {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragRow]],
+          $splice: [
+            [dragIndex, 1],
+            [hoverIndex, 0, dragRow],
+          ],
         },
       }),
     );
   };
   handleAdd = () => {
     const { count, instance } = this.state;
-    console.log(count)
+    console.log(count);
     const newData = {
       name: 'string (e.g.: skySpark1)',
       area: 'string (e.g.: 亦庄总部生产区)',
@@ -394,7 +395,7 @@ class EditableTable extends React.Component {
       version: 'string (e.g.: 1.2.3)',
       runningApplication: 'int',
       slot: 'int',
-      memoryUsed: 'int'
+      memoryUsed: 'int',
     };
     this.setState({
       instance: [...instance, newData],
@@ -438,7 +439,9 @@ class EditableTable extends React.Component {
 
     return (
       <PageHeaderWrapper>
-        <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>添加</Button>
+        <Button onClick={this.handleAdd} type="primary" style={{ marginBottom: 16 }}>
+          添加
+        </Button>
         <Card>
           <EditableContext.Provider value={this.props.form}>
             <DndProvider backend={HTML5Backend}>
@@ -447,8 +450,8 @@ class EditableTable extends React.Component {
                 dataSource={this.state.instance}
                 columns={columns}
                 rowClassName="editable-row"
-                pagination={{ onChange: this.cancel, }}
-                onRow={(record, index) => ({ index, moveRow: this.moveRow, })}
+                pagination={{ onChange: this.cancel }}
+                onRow={(record, index) => ({ index, moveRow: this.moveRow })}
               />
             </DndProvider>
           </EditableContext.Provider>

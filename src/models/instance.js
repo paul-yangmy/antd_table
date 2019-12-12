@@ -25,29 +25,29 @@ import { query } from '../services/instance';
 // };
 
 export default {
-    namespace: 'instance',
-    state: {
-        // buttonSelection,
-        instance: [],
-    },
+  namespace: 'instance',
+  state: {
+    // buttonSelection,
+    instance: [],
+  },
 
-    effects: {
-        * query({ payload, callback }, { call, put }) {
-            const response = yield call(query, payload);
-            yield put({
-                type: 'save',
-                payload: response,
-            });
-            console.log(response)
-            if (callback) callback(response)
-        },
+  effects: {
+    *query({ payload, callback }, { call, put }) {
+      const response = yield call(query, payload);
+      yield put({
+        type: 'save',
+        payload: response,
+      });
+      console.log(response);
+      if (callback) callback(response);
     },
-    reducers: {
-      save(state, action) {
-        return {
-              ...state,
-              instance: action.payload,
-          };
-      },
+  },
+  reducers: {
+    save(state, action) {
+      return {
+        ...state,
+        instance: action.payload,
+      };
     },
+  },
 };
