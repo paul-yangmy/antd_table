@@ -119,33 +119,33 @@ export default {
               authority: ['admin', 'user'],
               routes: [
                 {
-                  path: '/dashboard',
-                  name: 'dashboard',
+                  path: '/item',
+                  name: '商品',
                   icon: 'dashboard',
                   routes: [
                     {
                       name: 'instance',
                       icon: 'smile',
-                      path: '/dashboard/instance',
-                      component: './dashboard/instance',
+                      path: '/item/instance',
+                      component: './item/instance',
                     },
                     {
                       name: 'analysis',
                       icon: 'smile',
-                      path: '/dashboard/analysis',
-                      component: './dashboard/analysis',
+                      path: '/item/analysis',
+                      component: './item/analysis',
                     },
                     {
                       name: 'monitor',
                       icon: 'smile',
-                      path: '/dashboard/monitor',
-                      component: './dashboard/monitor',
+                      path: '/item/monitor',
+                      component: './item/monitor',
                     },
                     {
                       name: 'workplace',
                       icon: 'smile',
-                      path: '/dashboard/workplace',
-                      component: './dashboard/workplace',
+                      path: '/item/workplace',
+                      component: './item/workplace',
                     },
                   ],
                 },
@@ -337,7 +337,7 @@ export default {
                 },
                 {
                   path: '/',
-                  redirect: '/dashboard/instance',
+                  redirect: '/item/instance',
                   authority: ['admin', 'user'],
                 },
                 {
