@@ -119,6 +119,12 @@ export default {
               authority: ['admin', 'user'],
               routes: [
                 {
+                  path: '/home',
+                  name: '首页',
+                  icon: 'smile',              
+                  component: './home'
+                },
+                {
                   path: '/item',
                   name: '商品',
                   icon: 'dashboard',
@@ -337,7 +343,7 @@ export default {
                 },
                 {
                   path: '/',
-                  redirect: '/item/instance',
+                  redirect: '/home',
                   authority: ['admin', 'user'],
                 },
                 {
