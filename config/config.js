@@ -337,7 +337,7 @@ export default {
                 },
                 {
                   path: '/',
-                  redirect: '/dashboard/analysis',
+                  redirect: '/dashboard/instance',
                   authority: ['admin', 'user'],
                 },
                 {
