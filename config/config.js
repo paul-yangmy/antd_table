@@ -119,7 +119,7 @@ export default {
               authority: ['admin', 'user'],
               routes: [
                 {
-                  path: '/home',
+                  path: '/',
                   name: '首页',
                   icon: 'smile',              
                   component: './home'
