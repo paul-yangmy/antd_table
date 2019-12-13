@@ -38,7 +38,7 @@ const AuthComponent = ({
 }) => {
   const { currentUser } = user;
   const { routes = [] } = route;
-  const timeInterval = currentUser.logdate - localStorage.getItem('logInDate') <= 1000000;//1000s
+  const timeInterval = currentUser.logdate - localStorage.getItem('logInDate') <= 1000000;
   const isLogin = currentUser && currentUser.userid && timeInterval;
   const queryString = stringify({
     redirect: window.location.href,

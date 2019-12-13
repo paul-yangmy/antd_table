@@ -35,18 +35,20 @@ class SecurityLayout extends React.Component {
     // 你可以把它替换成你自己的登录认证规则（比如判断 token 是否存在）
     // console.log(currentUser)
     currentUser.logdate = moment().valueOf();
-    // console.log(currentUser.logdate)
+    console.log(currentUser.logdate)
     const timeInterval = currentUser.logdate - localStorage.getItem('logInDate') <= 1000000;//1000s
     const isLogin = currentUser && currentUser.userid && timeInterval;
-    // console.log(isLogin);
+    console.log(isLogin);
 
     const queryString = stringify({
       redirect: window.location.href,
     });
+    console.log(queryString);
     if ((!isLogin && loading) || !isReady) {
       return <PageLoading />;
     }
     if (!isLogin) {
+      // return <Redirect to={`/user/login?${queryString}`}></Redirect>;
       return <Redirect to={`/user/login?${queryString}`}></Redirect>;
     }
 

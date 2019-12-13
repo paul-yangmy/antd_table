@@ -3,7 +3,7 @@ import { stringify } from 'querystring';
 import { fakeAccountLogin, getFakeCaptcha } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
-
+import moment from 'moment';
 const Model = {
   namespace: 'login',
   state: {
@@ -12,6 +12,8 @@ const Model = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
+      const lastTime = moment().valueOf();
+      localStorage.setItem('logInDate', lastTime);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
@@ -21,7 +23,6 @@ const Model = {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params;
-
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
 
@@ -47,6 +48,8 @@ const Model = {
 
     *logout(_, { put }) {
       const { redirect } = getPageQuery(); // redirect
+      const lastTime = moment().valueOf();
+      localStorage.setItem('logInDate', lastTime);
 
       if (window.location.pathname !== '/user/login' && !redirect) {
         yield put(
@@ -63,6 +66,8 @@ const Model = {
   reducers: {
     changeLoginStatus(state, { payload }) {
       setAuthority(payload.currentAuthority);
+      const lastTime = moment().valueOf();
+      localStorage.setItem('logInDate', lastTime);
       return { ...state, status: payload.status, type: payload.type };
     },
   },

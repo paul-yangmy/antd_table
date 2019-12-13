@@ -82,6 +82,7 @@ class Login extends Component {
     const { form, onSubmit } = this.props;
     const activeFields = active[type] || [];
 
+
     if (form) {
       form.validateFields(
         activeFields,
@@ -102,6 +103,7 @@ class Login extends Component {
     const { type, tabs = [] } = this.state;
     const TabChildren = [];
     const otherChildren = [];
+  
     React.Children.forEach(children, child => {
       if (!child) {
         return;

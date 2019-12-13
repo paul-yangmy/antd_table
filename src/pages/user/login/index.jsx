@@ -5,6 +5,7 @@ import Link from 'umi/link';
 import { connect } from 'dva';
 import LoginComponents from './components/Login';
 import styles from './style.less';
+import moment from 'moment';
 
 const { Tab, UserName, Password, Mobile, Captcha, Submit } = LoginComponents;
 
@@ -31,6 +32,8 @@ class Login extends Component {
 
     if (!err) {
       const { dispatch } = this.props;
+      const lastTime = moment().valueOf();
+      localStorage.setItem('logInDate', lastTime);
       dispatch({
         type: 'userAndlogin/login',
         payload: { ...values, type },
